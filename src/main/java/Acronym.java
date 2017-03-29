@@ -9,7 +9,6 @@ public class Acronym {
         this.phrase = phrase;
     }
 
-
     /**
      * The method that will return the Acronym
      * 1) Break up Phrase into words
@@ -21,12 +20,12 @@ public class Acronym {
         StringBuilder sb = new StringBuilder();
         String[] words = phrase.split("\\s");
 
+        //looping through the words
         for(String word: words){
             sb.append(getAcronym(word));
         }
         return sb.toString().toUpperCase();
     }
-
 
     /**
      * Get Acronym for each word
@@ -36,24 +35,36 @@ public class Acronym {
      * @return - the acronym for the word
      */
     private String getAcronym(String word){
-        StringBuilder sb = new StringBuilder();
-        char[] letters = word.toCharArray();
+        StringBuilder sb;
+        char[] letters;
 
-        if(word.substring(1, word.length()).matches("[a-z]*") || word.matches("[A-Z]*")){
-            sb.append(word.substring(0,1));
+        if(isSingleAcronym(word)){
+            return word.substring(0,1);
         } else {
-            sb.append(letters[0]);
+            sb = new StringBuilder();
+            letters = word.toCharArray();
+            sb.append(letters[0]); // first letter will always be an acronym
+
+            // looping through each letter in word
+            // starting from the second letter in the word
             for (int i = 1; i<letters.length -1; i++){
                 if(isNextAcronym(letters[i],letters[i+1])){
                     sb.append(letters[i+1]);
                 }
             }
         }
-
-
-
-
         return sb.toString();
+    }
+
+    /**
+     * Check if the word only has a single Acronym
+     * Ruby --> true
+     * HyperText --> false
+     * @param word - check if it has a single acronym
+     * @return - true if single acronym
+     */
+    private boolean isSingleAcronym(String word){
+        return (word.substring(1, word.length()).matches("[a-z]*") || word.matches("[A-Z]*"));
     }
 
     /**
@@ -69,7 +80,4 @@ public class Acronym {
     private boolean isNextAcronym(char c, char nc){
         return ((Character.isLowerCase(c) && Character.isUpperCase(nc)) || (!Character.isLetter(c) && Character.isLetter(nc)));
     }
-
-
-
 }
