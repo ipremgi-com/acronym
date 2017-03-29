@@ -37,21 +37,38 @@ public class Acronym {
      */
     private String getAcronym(String word){
         StringBuilder sb = new StringBuilder();
+        char[] letters = word.toCharArray();
 
-        if(word.substring(1, word.length()).matches("[a-z]*")){
+        if(word.substring(1, word.length()).matches("[a-z]*") || word.matches("[A-Z]*")){
             sb.append(word.substring(0,1));
+        } else {
+            sb.append(letters[0]);
+            for (int i = 1; i<letters.length -1; i++){
+                if(isNextAcronym(letters[i],letters[i+1])){
+                    sb.append(letters[i+1]);
+                }
+            }
         }
 
 
 
 
         return sb.toString();
-
-
-
-
     }
 
+    /**
+     * To check if the next char is an Acronym based on the current char
+     * Example
+     *  H y --> no acronym
+     *  r T --> acronym
+     *  - o --> acronym
+     * @param c - current char
+     * @param nc - next char
+     * @return - true if next char is an acronym
+     */
+    private boolean isNextAcronym(char c, char nc){
+        return ((Character.isLowerCase(c) && Character.isUpperCase(nc)) || (Character.isLetter(c) && Character.isLetter(nc)));
+    }
 
 
 

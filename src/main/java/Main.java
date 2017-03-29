@@ -5,6 +5,6 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(new Acronym("Portable Network Graphics").get());
+        System.out.println(new Acronym("").get());
     }
 }
