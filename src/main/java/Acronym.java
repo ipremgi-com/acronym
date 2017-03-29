@@ -10,4 +10,21 @@ public class Acronym {
     }
 
 
+    /**
+     * The method that will return the Acronym
+     * 1) Break up Phrase into words
+     * 2) Loop through words and get Acronym
+     * 3) Build the Acronym based on each word Acronym
+     * @return - the acronym
+     */
+    public String get(){
+        StringBuilder sb = new StringBuilder();
+        String[] words = phrase.split("\\s");
+
+        for(String word: words){
+            sb.append(word.substring(0,1));
+        }
+        return sb.toString();
+    }
+
 }
