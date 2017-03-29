@@ -67,7 +67,7 @@ public class Acronym {
      * @return - true if next char is an acronym
      */
     private boolean isNextAcronym(char c, char nc){
-        return ((Character.isLowerCase(c) && Character.isUpperCase(nc)) || (Character.isLetter(c) && Character.isLetter(nc)));
+        return ((Character.isLowerCase(c) && Character.isUpperCase(nc)) || (!Character.isLetter(c) && Character.isLetter(nc)));
     }
 
 
